@@ -1,0 +1,113 @@
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+
+const data = [
+  { name: "00:00", value: 40 },
+  { name: "04:00", value: 35 },
+  { name: "08:00", value: 50 },
+  { name: "12:00", value: 65 },
+  { name: "16:00", value: 55 },
+  { name: "20:00", value: 70 },
+];
+
+export default function App() {
+  return (
+    <div className="bg-gray-50 text-gray-800 font-sans">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-24 px-6 text-center">
+        <motion.h1
+          className="text-5xl font-bold mb-4"
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Smart IoT Software Solutions
+        </motion.h1>
+        <motion.p
+          className="text-xl mb-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          Connecting devices, people, and data through cutting-edge IoT software.
+        </motion.p>
+        <Button className="bg-white text-blue-600 font-semibold px-8 py-3 rounded-full shadow hover:bg-gray-200 transition">
+          Get in Touch
+        </Button>
+      </section>
+
+      {/* Services */}
+      <section className="py-20 px-8 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
+        <div className="grid gap-8 md:grid-cols-3">
+          {["IoT App Development", "Cloud Integration", "Data Analytics"].map(
+            (service, i) => (
+              <motion.div
+                key={service}
+                className="bg-white rounded-2xl shadow-lg p-6 text-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 200 }}
+              >
+                <h3 className="text-xl font-semibold mb-3">{service}</h3>
+                <p>
+                  {i === 0 &&
+                    "Custom applications for managing and monitoring IoT devices at scale."}
+                  {i === 1 &&
+                    "Seamlessly connect devices to secure cloud platforms for real-time insights."}
+                  {i === 2 &&
+                    "Turn IoT data into actionable insights with advanced analytics and AI models."}
+                </p>
+              </motion.div>
+            )
+          )}
+        </div>
+      </section>
+
+      {/* Dashboard */}
+      <section className="bg-gray-100 py-20 px-8">
+        <h2 className="text-3xl font-bold text-center mb-10">Sample IoT Dashboard</h2>
+        <Card className="max-w-4xl mx-auto">
+          <CardContent className="grid md:grid-cols-2 gap-8 p-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Device Status</h3>
+              <ul className="space-y-2">
+                <li className="flex justify-between"><span>Sensor A</span><span className="text-green-600 font-medium">Active</span></li>
+                <li className="flex justify-between"><span>Sensor B</span><span className="text-red-600 font-medium">Offline</span></li>
+                <li className="flex justify-between"><span>Gateway 1</span><span className="text-green-600 font-medium">Connected</span></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Live Metrics</h3>
+              <ResponsiveContainer width="100%" height={200}>
+                <LineChart data={data}>
+                  <XAxis dataKey="name" stroke="#888" />
+                  <YAxis stroke="#888" />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="value" stroke="#3b82f6" strokeWidth={3} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-20 px-8 max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl font-bold mb-6">Let’s Build the Future Together</h2>
+        <p className="mb-6">Reach out to us for collaborations, partnerships, or custom IoT software solutions.</p>
+        <form className="grid gap-4">
+          <input type="text" placeholder="Your Name" className="p-3 border rounded-lg" />
+          <input type="email" placeholder="Your Email" className="p-3 border rounded-lg" />
+          <textarea placeholder="Your Message" rows="4" className="p-3 border rounded-lg"></textarea>
+          <Button className="bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">Send Message</Button>
+        </form>
+      </section>
+
+      <footer className="bg-gray-900 text-gray-300 py-6 text-center">
+        <p>© 2025 IoT Software Solutions. Built with 💡 and code.</p>
+      </footer>
+    </div>
+  );
+}
